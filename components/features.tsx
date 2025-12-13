@@ -60,7 +60,7 @@ export default function Features() {
       y: 0,
       scale: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 45,
         damping: 15,
         mass: 0.85,
@@ -75,7 +75,7 @@ export default function Features() {
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 50,
         damping: 12,
         duration: 0.6,
