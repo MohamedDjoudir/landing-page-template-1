@@ -118,9 +118,7 @@ export default function Features() {
           {features.map((feature, index) => (
             <div
               key={index}
-            
               className="border-2 border-white/20 bg-white/5 backdrop-blur-sm p-8 hover:border-white/50 hover:bg-white/10 transition-all duration-300 group rounded-sm"
-           
             >
               <div className="mb-6 text-white/80 group-hover:text-white transition-colors">
                 <div className="bg-white/10 p-3 inline-block rounded-sm group-hover:bg-white/20 transition-all duration-300">
