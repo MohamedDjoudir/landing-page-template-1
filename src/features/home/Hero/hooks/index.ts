@@ -1,0 +1,1 @@
+export { useHeroMouseEffect } from "./useHeroMouseEffect";

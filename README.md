@@ -1,56 +1,339 @@
+# MONO – Creative Agency Portfolio Template
 
----
-
-# MONO – Creative Agency Portfolio Template (Next.js + Tailwind CSS)
-
-**MONO** is a stylish and modern portfolio template built with **Next.js** and **Tailwind CSS**. Ideal for creative agencies, freelancers, and designers who want a bold, professional online presence.
+**MONO** is a stylish and modern portfolio template built with **Next.js 15**, **TypeScript**, and **Tailwind CSS**. Ideal for creative agencies, freelancers, and designers who want a bold, professional online presence.
 
 🔗 **Live Demo & Details:** [aniq-ui.com MONO Template](https://www.aniq-ui.com/en/templates/creative-agency-portfolio-nextjs-template)
 
+---
+
 ## 🚀 Getting Started
 
-To get started locally:
+### Prerequisites
 
-1. **Install dependencies**
+- Node.js 18.17 or later
+- npm, yarn, or pnpm
+
+### Installation
+
+1. **Clone the repository**
 
    ```sh
-   yarn install
+   git clone <repository-url>
+   cd landing-page-template-1
    ```
 
-2. **Start the development server**
+2. **Install dependencies**
 
    ```sh
-   yarn dev
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
+
+3. **Start the development server**
+
+   ```sh
+   npm run dev
    ```
 
    Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-3. **Build for production**
+4. **Build for production**
 
    ```sh
-   yarn build
-   yarn start
+   npm run build
+   npm start
    ```
+
+---
 
 ## 🧠 Project Structure
 
+This project follows a **feature-based architecture** with modular, reusable components:
+
 ```
-├── public/          # Static assets (images, fonts, etc.)
-├── src/             # Source code
-│   ├── components/  # Reusable UI components
-│   ├── pages/       # Next.js pages
-│   ├── styles/      # Tailwind & custom styles
-│   └── lib/         # Utilities and helpers
-└── .next/           # Build output (auto-generated)
+src/
+├── app/                    # Next.js App Router
+│   ├── layout.tsx          # Root layout with providers
+│   ├── page.tsx            # Home page
+│   └── globals.css         # Global styles
+│
+├── components/             # Shared/Reusable components
+│   ├── ui/                 # UI primitives (Button, Card, Input, etc.)
+│   ├── NoiseBackground/    # Self-contained noise effect component
+│   │   ├── index.tsx
+│   │   └── hooks/
+│   ├── FloatingCursor/     # Self-contained cursor component
+│   │   ├── index.tsx
+│   │   └── hooks/
+│   └── TextGenerateEffect.tsx
+│
+├── config/                 # App configuration
+│   └── site.config.ts      # Site-wide settings (nav, footer, social links)
+│
+├── features/               # Page-specific features (organized by page)
+│   ├── index.ts            # Feature exports
+│   └── home/               # Home page features
+│       ├── Hero/
+│       │   ├── index.tsx
+│       │   ├── components/
+│       │   └── hooks/
+│       ├── Features/
+│       ├── Work/
+│       ├── Process/
+│       ├── Testimonials/
+│       ├── Pricing/
+│       └── Contact/
+│
+├── hooks/                  # Global custom hooks
+├── layouts/                # Layout components
+│   ├── Navbar/
+│   │   ├── index.tsx
+│   │   ├── components/     # DesktopNav, MobileMenu, NavbarLogo, etc.
+│   │   ├── hooks/
+│   │   └── config/
+│   └── Footer/
+│       ├── index.tsx
+│       ├── components/     # FooterLogo, FooterNav, SocialLinks, etc.
+│       └── config/
+│
+├── lib/                    # Utility functions
+│   └── utils.ts            # cn() helper for Tailwind classes
+│
+├── providers/              # React context providers
+│   └── index.tsx           # ThemeProvider setup
+│
+├── services/               # API services (future use)
+├── store/                  # State management (future use)
+├── styles/                 # Additional styles
+└── types/                  # TypeScript type definitions
+    └── index.ts
 ```
+
+---
+
+## 📄 Adding a New Page
+
+Follow these steps to add a new page (e.g., `/about`):
+
+### Step 1: Create the Page Route
+
+Create a new file in `src/app/`:
+
+```tsx
+// src/app/about/page.tsx
+import { AboutHero, AboutTeam, AboutValues } from "@/features/about";
+
+export default function AboutPage() {
+  return (
+    <main>
+      <AboutHero />
+      <AboutValues />
+      <AboutTeam />
+    </main>
+  );
+}
+```
+
+### Step 2: Create the Features Folder
+
+Create the feature folder structure:
+
+```
+src/features/about/
+├── index.ts              # Export all features
+├── AboutHero/
+│   ├── index.tsx         # Main component
+│   ├── components/       # Sub-components
+│   └── hooks/            # Feature-specific hooks
+├── AboutTeam/
+│   ├── index.tsx
+│   └── components/
+└── AboutValues/
+    └── index.tsx
+```
+
+### Step 3: Create a Feature Component
+
+Example feature component:
+
+```tsx
+// src/features/about/AboutHero/index.tsx
+"use client";
+
+import { SectionHeader } from "@/components/ui/section-header";
+
+export function AboutHero() {
+  return (
+    <section className="min-h-screen flex items-center justify-center">
+      <SectionHeader
+        eyebrow="About Us"
+        title="We are MONO"
+        description="A creative agency passionate about design"
+      />
+    </section>
+  );
+}
+```
+
+### Step 4: Export from Feature Index
+
+```tsx
+// src/features/about/index.ts
+export { AboutHero } from "./AboutHero";
+export { AboutTeam } from "./AboutTeam";
+export { AboutValues } from "./AboutValues";
+```
+
+### Step 5: Add to Main Features Export
+
+```tsx
+// src/features/index.ts
+// Home features
+export {
+  Hero,
+  Features,
+  Work,
+  Process,
+  Testimonials,
+  Pricing,
+  Contact,
+} from "./home";
+
+// About features
+export { AboutHero, AboutTeam, AboutValues } from "./about";
+```
+
+### Step 6: Update Navigation (Optional)
+
+Add the new page to `src/config/site.config.ts`:
+
+```tsx
+export const siteConfig = {
+  navLinks: [
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" }, // Add new link
+    // ...
+  ],
+};
+```
+
+---
+
+## 🧩 Component Architecture
+
+### UI Components (`src/components/ui/`)
+
+Reusable, stateless UI primitives:
+
+- `Button` - Styled button with variants
+- `Card` - Container component
+- `Input` / `Textarea` - Form inputs
+- `Badge` - Label/tag component
+- `SectionHeader` - Consistent section headers
+
+### Self-Contained Components
+
+Components that are portable across projects:
+
+```
+src/components/NoiseBackground/
+├── index.tsx           # Main component
+└── hooks/
+    └── useNoiseBackground.ts  # Component-specific logic
+```
+
+### Feature Components
+
+Each feature follows this pattern:
+
+```
+src/features/home/Hero/
+├── index.tsx           # Main export
+├── components/         # Sub-components (HeroTitle, HeroButtons, etc.)
+├── hooks/              # Feature-specific hooks
+└── config/             # Feature-specific constants (optional)
+```
+
+---
+
+## 🎨 Styling
+
+- **Tailwind CSS** - Utility-first CSS framework
+- **CSS Variables** - Theme colors defined in `globals.css`
+- **Dark Mode** - Supported via `next-themes`
+- **Custom Utilities** - `cn()` helper for conditional classes
+
+```tsx
+import { cn } from "@/lib/utils";
+
+<div className={cn("base-class", isActive && "active-class")} />;
+```
+
+---
+
+## 🔧 Configuration
+
+### Site Config (`src/config/site.config.ts`)
+
+Centralized configuration for:
+
+- Navigation links
+- Footer links
+- Social media links
+- Site metadata
+
+### TypeScript Paths
+
+Path aliases configured in `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+Usage:
+
+```tsx
+import { Button } from "@/components/ui/button";
+import { Hero } from "@/features/home/Hero";
+import { cn } from "@/lib/utils";
+```
+
+---
 
 ## 🌟 Features
 
-* ✨ Built with Next.js and Tailwind CSS
-* 🎭 Bold, minimal design
-* 🖼️ Optimized for showcasing portfolios
-* 📱 Fully responsive and mobile-ready
-* 🔄 Easy to customize and scale
+- ✨ **Next.js 15** with App Router
+- 📝 **TypeScript** for type safety
+- 🎨 **Tailwind CSS** for styling
+- 🎭 **Framer Motion** for animations
+- 🌙 **Dark Mode** support
+- 📱 **Fully Responsive** design
+- 🧩 **Modular Architecture** for scalability
+- 🔄 **Reusable Components** across projects
+
+---
+
+## 📦 Tech Stack
+
+| Technology    | Purpose                         |
+| ------------- | ------------------------------- |
+| Next.js 15    | React framework with App Router |
+| TypeScript    | Type safety                     |
+| Tailwind CSS  | Utility-first styling           |
+| Framer Motion | Animations                      |
+| Lucide React  | Icons                           |
+| next-themes   | Theme management                |
+
+---
 
 ## 💬 Support
 
@@ -58,6 +341,10 @@ For questions or support, contact the [Aniq UI team](https://www.aniq-ui.com/#co
 
 ---
 
-Created by [Aniq UI](https://www.aniq-ui.com) — Premium Next.js Templates for modern web apps.
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
+
+Created by [Aniq UI](https://www.aniq-ui.com) — Premium Next.js Templates for modern web apps.

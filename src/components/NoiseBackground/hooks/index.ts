@@ -1,0 +1,1 @@
+export { useNoiseBackground } from "./useNoiseBackground";
