@@ -57,8 +57,13 @@ h3,
 h4,
 h5,
 h6 {
+    font-family: "Inter", sans-serif;
     font-weight: 700;
     letter-spacing: -0.03em;
+}
+
+:lang(ar) :is(h1, h2, h3, h4, h5, h6) {
+    font-family: inherit;
 }
 
 /* Smooth scrolling */

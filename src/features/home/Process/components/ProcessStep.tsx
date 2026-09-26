@@ -44,7 +44,7 @@ export function ProcessStep({
       </div>
 
       <div className="relative flex items-center justify-center z-10 md:static">
-        <div className="w-20 h-20 border-2 border-white/40 flex items-center justify-center bg-[#0a0a0a]">
+        <div className="w-20 h-20 border-2 border-white/40 flex items-center justify-center bg-[#0a0a0a] group-hover:border-white/60 transition-all duration-300">
           <div className="text-xl font-bold text-white">{number}</div>
         </div>
       </div>

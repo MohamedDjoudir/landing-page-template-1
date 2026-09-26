@@ -18,11 +18,9 @@ export function PricingCard({ plan, annual }: PricingCardProps) {
 
   return (
     <div
-      className={`p-8 relative backdrop-blur-sm group transition-all duration-300 ${
-        plan.popular
-          ? "bg-white/10 hover:bg-white/15"
-          : "bg-white/5 hover:bg-white/10"
-      }`}
+      className={`border-2 ${
+        plan.popular ? "border-white" : "border-white/20"
+      } p-8 relative bg-white/5 backdrop-blur-sm group hover:bg-white/10 transition-all duration-300`}
     >
       {plan.popular && (
         <div className="absolute top-0 end-0 bg-white text-black text-xs uppercase tracking-widest py-1 px-3 -mt-3 -me-3 font-medium">
@@ -65,6 +63,10 @@ export function PricingCard({ plan, annual }: PricingCardProps) {
       >
         {t(`plans.${plan.key}.cta`)}
       </Button>
+
+      {plan.popular && (
+        <div className="absolute inset-0 border-b-2 border-white opacity-20"></div>
+      )}
     </div>
   );
 }

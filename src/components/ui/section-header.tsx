@@ -3,7 +3,6 @@
 import type { ReactNode } from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
-import { useEntranceX } from "@/hooks";
 
 interface SectionHeaderProps {
   label: string;
@@ -22,12 +21,11 @@ export function SectionHeader({
   className,
   animate = true,
 }: SectionHeaderProps) {
-  const entranceX = useEntranceX();
   const Wrapper = animate ? motion.div : "div";
   const wrapperProps = animate
     ? {
-        initial: { opacity: 0, x: entranceX },
-        whileInView: { opacity: 1, x: 0 },
+        initial: { opacity: 0, y: 20 },
+        whileInView: { opacity: 1, y: 0 },
         viewport: { once: true },
         transition: { duration: 0.5 },
       }

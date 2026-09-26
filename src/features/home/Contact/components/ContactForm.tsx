@@ -38,8 +38,16 @@ export function ContactForm() {
         error={errors.message?.message}
         {...register("message")}
       />
-      <Button type="submit" variant="primary" className="w-full" disabled={isPending}>
-        {isPending ? t("sending") : t("submit")}
+      <Button
+        type="submit"
+        variant="primary"
+        className="w-full relative group overflow-hidden"
+        disabled={isPending}
+      >
+        <span className="relative z-10">
+          {isPending ? t("sending") : t("submit")}
+        </span>
+        <span className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
       </Button>
       {isSuccess && (
         <p role="status" className="text-white/80">

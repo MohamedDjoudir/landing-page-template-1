@@ -21,12 +21,12 @@ export function ProjectCard({
 
   return (
     <div className="group cursor-pointer">
-      <div className="relative aspect-[4/3] overflow-hidden mb-4">
+      <div className="relative aspect-[4/3] overflow-hidden border-2 border-white/20 mb-4 group-hover:border-white/50 transition-all duration-300">
         <Image
           src={image}
           alt={title}
           fill
-          className="object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
+          className="object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
 
@@ -36,7 +36,7 @@ export function ProjectCard({
         </div>
 
         {/* Overlay content */}
-        <div className="absolute bottom-0 inset-x-0 p-4 bg-black/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute bottom-0 inset-x-0 p-4 bg-black/60 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform duration-300">
           <div className="text-xs uppercase tracking-widest text-white/80 mb-1">
             {t("viewProject")}
           </div>

@@ -2,14 +2,11 @@
 
 import { forwardRef } from "react";
 import { motion } from "motion/react";
-import { useEntranceX } from "@/hooks";
 import { shapeAnimationDelay } from "../constants";
 import { HeroShapeLines } from "./HeroShapeLines";
 import { HeroShapeCore } from "./HeroShapeCore";
 
 export const HeroShape = forwardRef<HTMLDivElement>((_, ref) => {
-  const entranceX = useEntranceX(10);
-
   return (
     <div className="relative">
       <motion.div
@@ -27,8 +24,8 @@ export const HeroShape = forwardRef<HTMLDivElement>((_, ref) => {
         {/* Background shape */}
         <motion.div
           className="absolute -bottom-10 -end-10 w-2/3 h-2/3 border border-neutral-800 bg-neutral-950 z-[-1]"
-          initial={{ opacity: 0, x: -entranceX }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, x: 10, y: 10 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
           transition={{
             duration: 0.8,
             delay: shapeAnimationDelay,

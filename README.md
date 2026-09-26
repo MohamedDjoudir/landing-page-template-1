@@ -60,7 +60,6 @@ src/
 │   ├── Logo/  LocaleSwitcher/  FloatingCursor/  NoiseBackground/  TextGenerateEffect/
 ├── features/home/          # One folder per page section
 │   └── <Section>/          # index.tsx + components/ hooks/ constants/ types/ utils/ (as needed)
-├── hooks/                  # Shared hooks (useEntranceX)
 ├── i18n/                   # routing, request config, navigation helpers, direction
 ├── layouts/                # Navbar and Footer
 ├── lib/

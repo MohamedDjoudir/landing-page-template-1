@@ -2,16 +2,14 @@
 
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { useEntranceX } from "@/hooks";
 
 export function HeroScrollIndicator() {
   const t = useTranslations("hero");
-  const entranceX = useEntranceX();
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: entranceX }}
-      animate={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.8 }}
       className="absolute bottom-10 inset-x-0 flex justify-center"
     >
