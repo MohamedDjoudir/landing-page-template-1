@@ -44,36 +44,9 @@
         cursor: none;
     }
 
-    .custom-cursor {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 20px;
-        height: 20px;
-        border: 1px solid white;
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9999;
-        transform: translate(-50%, -50%);
-        transition: width 0.2s, height 0.2s;
-    }
-
-    .custom-cursor.active {
-        width: 50px;
-        height: 50px;
-        background-color: rgba(255, 255, 255, 0.1);
-    }
-
     a,
     button {
         cursor: none;
-    }
-
-    a:hover~.custom-cursor,
-    button:hover~.custom-cursor {
-        width: 50px;
-        height: 50px;
-        background-color: rgba(255, 255, 255, 0.1);
     }
 }
 
@@ -84,7 +57,6 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Inter", sans-serif;
     font-weight: 700;
     letter-spacing: -0.03em;
 }
@@ -109,4 +81,10 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+
+/* Arabic letters connect, so tracking would pull the joins apart. */
+:lang(ar),
+:lang(ar) * {
+    letter-spacing: 0 !important;
 }

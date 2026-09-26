@@ -1,108 +1,72 @@
 "use client";
 
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Instagram,
-  Twitter,
-  Linkedin,
-} from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Card } from "@/components/ui";
-import { contactConfig } from "@/config";
-
-interface ContactItemProps {
-  icon: React.ReactNode;
-  label: string;
-  children: React.ReactNode;
-}
-
-function ContactItem({ icon, label, children }: ContactItemProps) {
-  return (
-    <div className="flex items-start">
-      <div className="bg-white/10 p-2 rounded-sm mr-4">{icon}</div>
-      <div>
-        <div className="text-sm uppercase tracking-widest text-white/70 mb-2">
-          {label}
-        </div>
-        {children}
-      </div>
-    </div>
-  );
-}
+import { contactDetails, contactSocials } from "../constants";
+import { ContactItem } from "./ContactItem";
 
 export function ContactInfo() {
-  const { info } = contactConfig;
+  const t = useTranslations("contact.info");
+  const tSocial = useTranslations("common.social");
 
   return (
     <Card className="h-full">
-      <h3 className="text-2xl font-bold mb-6 text-white">
-        Contact Information
-      </h3>
+      <h3 className="text-2xl font-bold mb-6 text-white">{t("title")}</h3>
       <div className="space-y-8">
         <ContactItem
           icon={<Mail className="w-5 h-5 text-white" />}
-          label="Email"
+          label={t("email")}
         >
           <a
-            href={`mailto:${info.email}`}
+            href={`mailto:${contactDetails.email}`}
             className="text-white hover:text-white/70 transition-colors"
           >
-            {info.email}
+            {contactDetails.email}
           </a>
         </ContactItem>
 
         <ContactItem
           icon={<Phone className="w-5 h-5 text-white" />}
-          label="Phone"
+          label={t("phone")}
         >
           <a
-            href={`tel:${info.phone.replace(/\s/g, "")}`}
+            href={`tel:${contactDetails.phone.replace(/\s/g, "")}`}
+            dir="ltr"
             className="text-white hover:text-white/70 transition-colors"
           >
-            {info.phone}
+            {contactDetails.phone}
           </a>
         </ContactItem>
 
         <ContactItem
           icon={<MapPin className="w-5 h-5 text-white" />}
-          label="Address"
+          label={t("address")}
         >
           <address className="not-italic text-white/80">
-            {info.address.street}
+            {t("street")}
             <br />
-            {info.address.city}
+            {t("city")}
             <br />
-            {info.address.country}
+            {t("country")}
           </address>
         </ContactItem>
 
         <div>
           <div className="text-sm uppercase tracking-widest text-white/70 mb-3">
-            Social
+            {t("social")}
           </div>
           <div className="flex gap-4">
-            <a
-              href="#"
-              className="bg-white/10 p-2 rounded-sm hover:bg-white/20 transition-colors group"
-              aria-label="Instagram"
-            >
-              <Instagram className="w-5 h-5 text-white/70 group-hover:text-white transition-colors" />
-            </a>
-            <a
-              href="#"
-              className="bg-white/10 p-2 rounded-sm hover:bg-white/20 transition-colors group"
-              aria-label="Twitter"
-            >
-              <Twitter className="w-5 h-5 text-white/70 group-hover:text-white transition-colors" />
-            </a>
-            <a
-              href="#"
-              className="bg-white/10 p-2 rounded-sm hover:bg-white/20 transition-colors group"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-5 h-5 text-white/70 group-hover:text-white transition-colors" />
-            </a>
+            {contactSocials.map(({ key, href, icon: Icon }) => (
+              <a
+                key={key}
+                href={href}
+                className="bg-white/10 p-2 rounded-sm hover:bg-white/20 transition-colors group"
+                aria-label={tSocial(key)}
+              >
+                <Icon className="w-5 h-5 text-white/70 group-hover:text-white transition-colors" />
+              </a>
+            ))}
           </div>
         </div>
       </div>

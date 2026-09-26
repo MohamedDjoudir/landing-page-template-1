@@ -1,0 +1,1 @@
+export { useTextGenerate } from "./useTextGenerate";

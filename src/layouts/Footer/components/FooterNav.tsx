@@ -1,17 +1,20 @@
 "use client";
 
-import { footerNavLinks } from "../config";
+import { useTranslations } from "next-intl";
+import { sectionLinks } from "../../constants";
 
 export function FooterNav() {
+  const t = useTranslations("navigation");
+
   return (
     <nav className="flex gap-6">
-      {footerNavLinks.map((link) => (
+      {sectionLinks.map((link) => (
         <a
           key={link.href}
           href={link.href}
           className="text-neutral-400 hover:text-white transition-colors text-sm"
         >
-          {link.label}
+          {t(link.key)}
         </a>
       ))}
     </nav>

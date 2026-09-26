@@ -1,7 +1,7 @@
 "use client";
 
+import { Logo } from "@/components";
 import {
-  FooterLogo,
   FooterNav,
   SocialLinks,
   LegalLinks,
@@ -14,7 +14,7 @@ export function Footer() {
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
-            <FooterLogo />
+            <Logo />
           </div>
           <div className="flex flex-col md:flex-row gap-8 md:items-center">
             <FooterNav />

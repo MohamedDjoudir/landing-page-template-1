@@ -1,0 +1,1 @@
+export { useLocaleSwitcher } from "./useLocaleSwitcher";

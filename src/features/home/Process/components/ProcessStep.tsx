@@ -19,32 +19,32 @@ export function ProcessStep({
         isEven ? "md:flex-row-reverse" : "md:flex-row"
       }`}
     >
-      <div className={`flex-1 ${isEven ? "" : "md:text-right"} pl-24 md:pl-0`}>
+      <div className={`flex-1 ${isEven ? "" : "md:text-end"} ps-24 md:ps-0`}>
         <div
           className={`text-5xl md:text-7xl font-bold text-white/40 mb-4 ${
-            isEven ? "" : "md:text-right"
+            isEven ? "" : "md:text-end"
           }`}
         >
           {number}
         </div>
         <h3
           className={`text-2xl font-bold mb-2 text-white ${
-            isEven ? "" : "md:text-right"
+            isEven ? "" : "md:text-end"
           }`}
         >
           {title}
         </h3>
         <p
           className={`text-white/85 ${
-            isEven ? "" : "md:text-right md:ml-auto"
+            isEven ? "" : "md:text-end md:ms-auto"
           } ${isEven ? "max-w-sm" : "md:max-w-sm md:inline-block"}`}
         >
           {description}
         </p>
       </div>
 
-      <div className="relative flex items-center justify-center z-10 absolute-vertical-center md:static">
-        <div className="w-20 h-20 border-2 border-white/40 flex items-center justify-center bg-[#0a0a0a] group-hover:border-white/60 transition-all duration-300">
+      <div className="relative flex items-center justify-center z-10 md:static">
+        <div className="w-20 h-20 border-2 border-white/40 flex items-center justify-center bg-[#0a0a0a]">
           <div className="text-xl font-bold text-white">{number}</div>
         </div>
       </div>

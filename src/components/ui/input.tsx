@@ -2,32 +2,38 @@
 
 import { forwardRef, type InputHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
+import { FieldLabel } from "./field-label";
+import { FieldError } from "./field-error";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  error?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, label, id, ...props }, ref) => {
+  ({ className, label, error, id, required, ...props }, ref) => {
+    const errorId = id ? `${id}-error` : undefined;
+
     return (
       <div>
         {label && (
-          <label
-            htmlFor={id}
-            className="block text-sm uppercase tracking-widest text-white/70 mb-2"
-          >
+          <FieldLabel htmlFor={id} required={required}>
             {label}
-          </label>
+          </FieldLabel>
         )}
         <input
           ref={ref}
           id={id}
+          required={required}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? errorId : undefined}
           className={cn(
             "w-full bg-white/5 border-2 border-white/20 p-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors",
             className
           )}
           {...props}
         />
+        <FieldError id={errorId} message={error} />
       </div>
     );
   }

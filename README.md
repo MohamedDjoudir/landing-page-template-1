@@ -1,350 +1,108 @@
-# MONO – Creative Agency Portfolio Template
+# MONO - Creative Agency Portfolio Template
 
-**MONO** is a stylish and modern portfolio template built with **Next.js 15**, **TypeScript**, and **Tailwind CSS**. Ideal for creative agencies, freelancers, and designers who want a bold, professional online presence.
+**MONO** is a minimal, brutalist portfolio template built with **Next.js 15**, **TypeScript** and **Tailwind CSS**, available in **English** and **Arabic** (RTL).
 
-🔗 **Live Demo & Details:** [aniq-ui.com MONO Template](https://www.aniq-ui.com/en/templates/creative-agency-portfolio-nextjs-template)
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18.17 or later
-- npm, yarn, or pnpm
-
-### Installation
-
-1. **Clone the repository**
-
-   ```sh
-   git clone <repository-url>
-   cd landing-page-template-1
-   ```
-
-2. **Install dependencies**
-
-   ```sh
-   npm install
-   # or
-   yarn install
-   # or
-   pnpm install
-   ```
-
-3. **Start the development server**
-
-   ```sh
-   npm run dev
-   ```
-
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-4. **Build for production**
-
-   ```sh
-   npm run build
-   npm start
-   ```
+Live demo and details: [aniq-ui.com MONO Template](https://www.aniq-ui.com/en/templates/creative-agency-portfolio-nextjs-template)
 
 ---
 
-## 🧠 Project Structure
+## Getting Started
 
-This project follows a **feature-based architecture** with modular, reusable components:
+Requirements: Node.js 18.17 or later and Yarn (`corepack enable`).
+
+```sh
+yarn install
+cp .env.example .env.local   # optional, see Environment
+yarn dev
+```
+
+Open the dev server URL: `/` redirects to `/en`, and `/ar` serves the Arabic (right-to-left) version.
+
+| Script           | Purpose                    |
+| ---------------- | -------------------------- |
+| `yarn dev`       | Start the dev server       |
+| `yarn build`     | Production build           |
+| `yarn start`     | Serve the production build |
+| `yarn lint`      | Run `next lint`            |
+| `yarn typecheck` | Run `tsc --noEmit`         |
+
+Every dependency is pinned to an exact version and `yarn.lock` is committed.
+
+---
+
+## Environment
+
+| Variable                   | Purpose                                                                                                                          |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_API_BASE_URL` | Base URL of the API that receives the contact form (`POST /contact` with `{ name, email, message }`). Leave empty to run without a back-end: the form then accepts the message locally and shows its success state. |
+
+---
+
+## Languages
+
+- Locales: `en` (default) and `ar`, routed as `/en` and `/ar`.
+- Messages live in `messages/en.json` and `messages/ar.json`. Every visible string, aria-label, alt text and the page metadata comes from these files, so add a key to both files together.
+- `<html lang dir>` follows the locale, and the layout uses logical Tailwind classes (`ms-*`, `pe-*`, `start-*`, `text-end`) so it mirrors under RTL.
+- To add a locale, add it to `src/i18n/routing.ts`, create `messages/<locale>.json`, and register its direction in `src/i18n/getDirection.ts`.
+- The header holds a `LocaleSwitcher` (`src/components/LocaleSwitcher`).
+
+---
+
+## Project Structure
 
 ```
+messages/                   # en.json, ar.json
 src/
-├── app/                    # Next.js App Router
-│   ├── layout.tsx          # Root layout with providers
-│   ├── page.tsx            # Home page
-│   └── globals.css         # Global styles
-│
-├── components/             # Shared/Reusable components
-│   ├── ui/                 # UI primitives (Button, Card, Input, etc.)
-│   ├── NoiseBackground/    # Self-contained noise effect component
-│   │   ├── index.tsx
-│   │   └── hooks/
-│   ├── FloatingCursor/     # Self-contained cursor component
-│   │   ├── index.tsx
-│   │   └── hooks/
-│   └── TextGenerateEffect.tsx
-│
-├── config/                 # App configuration
-│   └── site.config.ts      # Site-wide settings (nav, footer, social links)
-│
-├── features/               # Page-specific features (organized by page)
-│   ├── index.ts            # Feature exports
-│   └── home/               # Home page features
-│       ├── Hero/
-│       │   ├── index.tsx
-│       │   ├── components/
-│       │   └── hooks/
-│       ├── Features/
-│       ├── Work/
-│       ├── Process/
-│       ├── Testimonials/
-│       ├── Pricing/
-│       └── Contact/
-│
-├── hooks/                  # Global custom hooks
-├── layouts/                # Layout components
-│   ├── Navbar/
-│   │   ├── index.tsx
-│   │   ├── components/     # DesktopNav, MobileMenu, NavbarLogo, etc.
-│   │   ├── hooks/
-│   │   └── config/
-│   └── Footer/
-│       ├── index.tsx
-│       ├── components/     # FooterLogo, FooterNav, SocialLinks, etc.
-│       └── config/
-│
-├── lib/                    # Utility functions
-│   └── utils.ts            # cn() helper for Tailwind classes
-│
-├── providers/              # React context providers
-│   └── index.tsx           # ThemeProvider setup
-│
-├── services/               # API services (future use)
-├── store/                  # State management (future use)
-├── styles/                 # Additional styles
-└── types/                  # TypeScript type definitions
-    └── index.ts
+├── app/[locale]/           # layout.tsx (html, providers, metadata) and page.tsx (home composition)
+├── components/             # Shared components
+│   ├── ui/                 # Button, Card, Input, Textarea, Badge, SectionHeader, field parts
+│   ├── icons/              # Brand SVG icons
+│   ├── Logo/  LocaleSwitcher/  FloatingCursor/  NoiseBackground/  TextGenerateEffect/
+├── features/home/          # One folder per page section
+│   └── <Section>/          # index.tsx + components/ hooks/ constants/ types/ utils/ (as needed)
+├── hooks/                  # Shared hooks (useEntranceX)
+├── i18n/                   # routing, request config, navigation helpers, direction
+├── layouts/                # Navbar and Footer
+├── lib/
+│   ├── api/                # The only place with fetch and endpoint URLs
+│   └── utils.ts            # cn() helper
+├── providers/              # ThemeProvider, QueryProvider
+├── services/               # TanStack Query hooks (services/contact/hooks/mutations)
+├── styles/                 # globals.css
+├── types/                  # Shared types (ApiResponse, ContactPayload)
+└── middleware.ts           # Locale routing
 ```
+
+Conventions: one component per file with an `index.ts` barrel, one hook per file, one helper per file, constants hold keys, routes, icons and numbers only (text lives in the message files).
+
+### Contact form data flow
+
+`ContactForm` (React Hook Form + Zod, messages translated) -> `useContactForm` -> `useSendContactMessage` (`src/services/contact`) -> `contactApi.send` (`src/lib/api/contact.ts`).
 
 ---
 
-## 📄 Adding a New Page
+## Tech Stack
 
-Follow these steps to add a new page (e.g., `/about`):
-
-### Step 1: Create the Page Route
-
-Create a new file in `src/app/`:
-
-```tsx
-// src/app/about/page.tsx
-import { AboutHero, AboutTeam, AboutValues } from "@/features/about";
-
-export default function AboutPage() {
-  return (
-    <main>
-      <AboutHero />
-      <AboutValues />
-      <AboutTeam />
-    </main>
-  );
-}
-```
-
-### Step 2: Create the Features Folder
-
-Create the feature folder structure:
-
-```
-src/features/about/
-├── index.ts              # Export all features
-├── AboutHero/
-│   ├── index.tsx         # Main component
-│   ├── components/       # Sub-components
-│   └── hooks/            # Feature-specific hooks
-├── AboutTeam/
-│   ├── index.tsx
-│   └── components/
-└── AboutValues/
-    └── index.tsx
-```
-
-### Step 3: Create a Feature Component
-
-Example feature component:
-
-```tsx
-// src/features/about/AboutHero/index.tsx
-"use client";
-
-import { SectionHeader } from "@/components/ui/section-header";
-
-export function AboutHero() {
-  return (
-    <section className="min-h-screen flex items-center justify-center">
-      <SectionHeader
-        eyebrow="About Us"
-        title="We are MONO"
-        description="A creative agency passionate about design"
-      />
-    </section>
-  );
-}
-```
-
-### Step 4: Export from Feature Index
-
-```tsx
-// src/features/about/index.ts
-export { AboutHero } from "./AboutHero";
-export { AboutTeam } from "./AboutTeam";
-export { AboutValues } from "./AboutValues";
-```
-
-### Step 5: Add to Main Features Export
-
-```tsx
-// src/features/index.ts
-// Home features
-export {
-  Hero,
-  Features,
-  Work,
-  Process,
-  Testimonials,
-  Pricing,
-  Contact,
-} from "./home";
-
-// About features
-export { AboutHero, AboutTeam, AboutValues } from "./about";
-```
-
-### Step 6: Update Navigation (Optional)
-
-Add the new page to `src/config/site.config.ts`:
-
-```tsx
-export const siteConfig = {
-  navLinks: [
-    { label: "Home", href: "/" },
-    { label: "About", href: "/about" }, // Add new link
-    // ...
-  ],
-};
-```
+| Technology            | Purpose                         |
+| --------------------- | ------------------------------- |
+| Next.js 15            | React framework with App Router |
+| next-intl             | Localisation and locale routing |
+| TypeScript            | Type safety                     |
+| Tailwind CSS          | Utility-first styling           |
+| Motion                | Animations                      |
+| TanStack Query        | Mutations and server state      |
+| React Hook Form + Zod | Forms and validation            |
+| Lucide React          | Icons                           |
+| next-themes           | Theme management                |
 
 ---
 
-## 🧩 Component Architecture
-
-### UI Components (`src/components/ui/`)
-
-Reusable, stateless UI primitives:
-
-- `Button` - Styled button with variants
-- `Card` - Container component
-- `Input` / `Textarea` - Form inputs
-- `Badge` - Label/tag component
-- `SectionHeader` - Consistent section headers
-
-### Self-Contained Components
-
-Components that are portable across projects:
-
-```
-src/components/NoiseBackground/
-├── index.tsx           # Main component
-└── hooks/
-    └── useNoiseBackground.ts  # Component-specific logic
-```
-
-### Feature Components
-
-Each feature follows this pattern:
-
-```
-src/features/home/Hero/
-├── index.tsx           # Main export
-├── components/         # Sub-components (HeroTitle, HeroButtons, etc.)
-├── hooks/              # Feature-specific hooks
-└── config/             # Feature-specific constants (optional)
-```
-
----
-
-## 🎨 Styling
-
-- **Tailwind CSS** - Utility-first CSS framework
-- **CSS Variables** - Theme colors defined in `globals.css`
-- **Dark Mode** - Supported via `next-themes`
-- **Custom Utilities** - `cn()` helper for conditional classes
-
-```tsx
-import { cn } from "@/lib/utils";
-
-<div className={cn("base-class", isActive && "active-class")} />;
-```
-
----
-
-## 🔧 Configuration
-
-### Site Config (`src/config/site.config.ts`)
-
-Centralized configuration for:
-
-- Navigation links
-- Footer links
-- Social media links
-- Site metadata
-
-### TypeScript Paths
-
-Path aliases configured in `tsconfig.json`:
-
-```json
-{
-  "compilerOptions": {
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
-}
-```
-
-Usage:
-
-```tsx
-import { Button } from "@/components/ui/button";
-import { Hero } from "@/features/home/Hero";
-import { cn } from "@/lib/utils";
-```
-
----
-
-## 🌟 Features
-
-- ✨ **Next.js 15** with App Router
-- 📝 **TypeScript** for type safety
-- 🎨 **Tailwind CSS** for styling
-- 🎭 **Framer Motion** for animations
-- 🌙 **Dark Mode** support
-- 📱 **Fully Responsive** design
-- 🧩 **Modular Architecture** for scalability
-- 🔄 **Reusable Components** across projects
-
----
-
-## 📦 Tech Stack
-
-| Technology    | Purpose                         |
-| ------------- | ------------------------------- |
-| Next.js 15    | React framework with App Router |
-| TypeScript    | Type safety                     |
-| Tailwind CSS  | Utility-first styling           |
-| Framer Motion | Animations                      |
-| Lucide React  | Icons                           |
-| next-themes   | Theme management                |
-
----
-
-## 💬 Support
+## Support
 
 For questions or support, contact the [Aniq UI team](https://www.aniq-ui.com/#contact).
 
----
+## License
 
-## 📝 License
+MIT License, see the [LICENSE](LICENSE) file.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-Created by [Aniq UI](https://www.aniq-ui.com) — Premium Next.js Templates for modern web apps.
+Created by [Aniq UI](https://www.aniq-ui.com), premium Next.js templates for modern web apps.

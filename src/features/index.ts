@@ -1,4 +1,3 @@
-// Home page features
 export { Hero } from "./home/Hero";
 export { Features } from "./home/Features";
 export { Work } from "./home/Work";

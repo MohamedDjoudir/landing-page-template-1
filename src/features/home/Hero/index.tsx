@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui";
-import { heroConfig } from "@/config";
+import { useEntranceX } from "@/hooks";
 import { useHeroMouseEffect } from "./hooks";
 import {
   HeroHeadline,
@@ -12,6 +13,8 @@ import {
 } from "./components";
 
 export function Hero() {
+  const t = useTranslations("hero");
+  const entranceX = useEntranceX();
   const { shapeRef } = useHeroMouseEffect();
 
   return (
@@ -24,23 +27,23 @@ export function Hero() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: entranceX }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
               className="mb-6"
             >
-              <Badge variant="outline">{heroConfig.badge}</Badge>
+              <Badge variant="outline">{t("badge")}</Badge>
             </motion.div>
 
             <HeroHeadline />
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: entranceX }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
               className="text-neutral-400 mb-8 max-w-md text-lg"
             >
-              {heroConfig.description}
+              {t("description")}
             </motion.p>
 
             <HeroButtons />

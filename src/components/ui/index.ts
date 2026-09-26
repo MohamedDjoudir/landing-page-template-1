@@ -4,3 +4,5 @@ export { Badge } from "./badge";
 export { Card } from "./card";
 export { Input } from "./input";
 export { Textarea } from "./textarea";
+export { FieldLabel } from "./field-label";
+export { FieldError } from "./field-error";

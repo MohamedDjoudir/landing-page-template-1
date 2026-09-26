@@ -1,12 +1,15 @@
 "use client";
 
 import { forwardRef } from "react";
-import { motion } from "framer-motion";
-import { heroConfig } from "@/config";
-
-const { shapeAnimationDelay } = heroConfig;
+import { motion } from "motion/react";
+import { useEntranceX } from "@/hooks";
+import { shapeAnimationDelay } from "../constants";
+import { HeroShapeLines } from "./HeroShapeLines";
+import { HeroShapeCore } from "./HeroShapeCore";
 
 export const HeroShape = forwardRef<HTMLDivElement>((_, ref) => {
+  const entranceX = useEntranceX(10);
+
   return (
     <div className="relative">
       <motion.div
@@ -23,9 +26,9 @@ export const HeroShape = forwardRef<HTMLDivElement>((_, ref) => {
       >
         {/* Background shape */}
         <motion.div
-          className="absolute -bottom-10 -right-10 w-2/3 h-2/3 border border-neutral-800 bg-neutral-950 z-[-1]"
-          initial={{ opacity: 0, x: 10, y: 10 }}
-          animate={{ opacity: 1, x: 0, y: 0 }}
+          className="absolute -bottom-10 -end-10 w-2/3 h-2/3 border border-neutral-800 bg-neutral-950 z-[-1]"
+          initial={{ opacity: 0, x: -entranceX }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{
             duration: 0.8,
             delay: shapeAnimationDelay,
@@ -47,7 +50,6 @@ export const HeroShape = forwardRef<HTMLDivElement>((_, ref) => {
             damping: 20,
           }}
         >
-          {/* Background gradient */}
           <motion.div
             className="absolute inset-0 bg-gradient-to-br from-neutral-700 to-neutral-900"
             initial={{ opacity: 0 }}
@@ -62,68 +64,8 @@ export const HeroShape = forwardRef<HTMLDivElement>((_, ref) => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: shapeAnimationDelay + 0.3 }}
             >
-              {/* Four lines - animate in sequence */}
-              <motion.div
-                className="absolute top-0 left-0 w-full h-1 bg-white"
-                initial={{ scaleX: 0, originX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.5, delay: shapeAnimationDelay + 0.4 }}
-              ></motion.div>
-              <motion.div
-                className="absolute bottom-0 right-0 w-full h-1 bg-white"
-                initial={{ scaleX: 0, originX: 1 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.5, delay: shapeAnimationDelay + 0.5 }}
-              ></motion.div>
-              <motion.div
-                className="absolute top-0 right-0 h-full w-1 bg-white"
-                initial={{ scaleY: 0, originY: 0 }}
-                animate={{ scaleY: 1 }}
-                transition={{ duration: 0.5, delay: shapeAnimationDelay + 0.6 }}
-              ></motion.div>
-              <motion.div
-                className="absolute bottom-0 left-0 h-full w-1 bg-white"
-                initial={{ scaleY: 0, originY: 1 }}
-                animate={{ scaleY: 1 }}
-                transition={{ duration: 0.5, delay: shapeAnimationDelay + 0.7 }}
-              ></motion.div>
-
-              {/* Center square */}
-              <motion.div
-                className="absolute top-1/4 left-1/4 w-1/2 h-1/2 border border-neutral-700 flex items-center justify-center"
-                initial={{ opacity: 0, scale: 0.7 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{
-                  duration: 0.6,
-                  delay: shapeAnimationDelay + 0.8,
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 15,
-                }}
-              >
-                <motion.div
-                  className="w-3/4 h-3/4 bg-neutral-900 flex items-center justify-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{
-                    duration: 0.5,
-                    delay: shapeAnimationDelay + 0.9,
-                  }}
-                >
-                  <motion.div
-                    className="w-1/2 h-1/2 bg-white"
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{
-                      duration: 0.5,
-                      delay: shapeAnimationDelay + 1.0,
-                      type: "spring",
-                      stiffness: 200,
-                      damping: 15,
-                    }}
-                  ></motion.div>
-                </motion.div>
-              </motion.div>
+              <HeroShapeLines />
+              <HeroShapeCore />
             </motion.div>
           </div>
         </motion.div>

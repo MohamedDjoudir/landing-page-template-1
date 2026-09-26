@@ -1,12 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
+import type { ReactNode } from "react";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { useEntranceX } from "@/hooks";
 
 interface SectionHeaderProps {
   label: string;
   title: string;
   subtitle?: string;
+  action?: ReactNode;
   className?: string;
   animate?: boolean;
 }
@@ -15,14 +18,16 @@ export function SectionHeader({
   label,
   title,
   subtitle,
+  action,
   className,
   animate = true,
 }: SectionHeaderProps) {
+  const entranceX = useEntranceX();
   const Wrapper = animate ? motion.div : "div";
   const wrapperProps = animate
     ? {
-        initial: { opacity: 0, y: 20 },
-        whileInView: { opacity: 1, y: 0 },
+        initial: { opacity: 0, x: entranceX },
+        whileInView: { opacity: 1, x: 0 },
         viewport: { once: true },
         transition: { duration: 0.5 },
       }
@@ -36,15 +41,27 @@ export function SectionHeader({
           {label}
         </div>
       </div>
-      <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-white">
-        {title}
-        {subtitle && (
-          <>
-            <br />
-            <span className="text-white/70">{subtitle}</span>
-          </>
+      <div
+        className={cn(
+          action && "flex flex-col md:flex-row md:items-end justify-between"
         )}
-      </h2>
+      >
+        <h2
+          className={cn(
+            "text-4xl md:text-5xl font-bold tracking-tighter text-white",
+            action && "mb-4 md:mb-0"
+          )}
+        >
+          {title}
+          {subtitle && (
+            <>
+              <br />
+              <span className="text-white/70">{subtitle}</span>
+            </>
+          )}
+        </h2>
+        {action}
+      </div>
     </Wrapper>
   );
 }

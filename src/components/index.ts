@@ -1,6 +1,5 @@
 export { NoiseBackground } from "./NoiseBackground";
 export { FloatingCursor } from "./FloatingCursor";
-export {
-    TextGenerateEffect,
-    ContentGenerateEffect,
-} from "./TextGenerateEffect";
+export { TextGenerateEffect } from "./TextGenerateEffect";
+export { Logo } from "./Logo";
+export { LocaleSwitcher } from "./LocaleSwitcher";

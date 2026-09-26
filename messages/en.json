@@ -1,0 +1,228 @@
+{
+  "metadata": {
+    "title": "Mono - MINIMAL BRUTALIST DESIGN",
+    "siteName": "Mono",
+    "description": "We create minimalist digital experiences that make an impact. Raw, unfiltered, and straight to the point.",
+    "ogImageAlt": "Mono Website Preview"
+  },
+  "common": {
+    "brand": "MONO",
+    "social": {
+      "instagram": "Instagram",
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
+    }
+  },
+  "localeSwitcher": {
+    "switchTo": "Switch language to {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية"
+    }
+  },
+  "navigation": {
+    "features": "Features",
+    "work": "Work",
+    "process": "Process",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "hero": {
+    "badge": "Digital Design Studio",
+    "headline": {
+      "line1": "MINIMAL",
+      "line2": "BRUTALIST",
+      "line3": "DESIGN"
+    },
+    "description": "We create minimalist digital experiences that make an impact. Raw, unfiltered, and straight to the point.",
+    "primaryCta": "View Our Work",
+    "secondaryCta": "About Us",
+    "scroll": "Scroll",
+    "discover": "Discover"
+  },
+  "features": {
+    "label": "Our Approach",
+    "title": "Minimalist Design",
+    "subtitle": "Maximum Impact",
+    "items": {
+      "minimalist": {
+        "title": "Minimalist Design",
+        "description": "Clean, uncluttered interfaces that focus on content and functionality without unnecessary elements."
+      },
+      "brutalist": {
+        "title": "Brutalist Approach",
+        "description": "Raw, honest design that embraces the digital medium without trying to mimic physical materials."
+      },
+      "responsive": {
+        "title": "Responsive Layout",
+        "description": "Perfectly adapted experiences across all devices, from desktop to mobile, without compromise."
+      },
+      "performance": {
+        "title": "Performance Focus",
+        "description": "Lightning-fast loading times and smooth interactions for optimal user experience."
+      }
+    }
+  },
+  "work": {
+    "label": "Selected Work",
+    "title": "Our Latest",
+    "subtitle": "Projects",
+    "viewAll": "View All Work",
+    "viewProject": "View Project",
+    "projects": {
+      "brutalist": { "title": "BRUTALIST", "subtitle": "Digital Platform" },
+      "monochrome": { "title": "MONOCHROME", "subtitle": "Brand Identity" },
+      "minimal": { "title": "MINIMAL", "subtitle": "Web Experience" },
+      "contrast": { "title": "CONTRAST", "subtitle": "Mobile Application" }
+    }
+  },
+  "process": {
+    "label": "How We Work",
+    "title": "Our Process",
+    "subtitle": "Step by Step",
+    "steps": {
+      "discovery": {
+        "title": "Discovery",
+        "description": "We analyze your needs, goals, and target audience to establish a solid foundation for the project."
+      },
+      "strategy": {
+        "title": "Strategy",
+        "description": "We develop a comprehensive plan that aligns with your business objectives and user expectations."
+      },
+      "design": {
+        "title": "Design",
+        "description": "We create minimalist, brutalist designs that focus on functionality and user experience."
+      },
+      "development": {
+        "title": "Development",
+        "description": "We build your digital product using modern technologies and best practices for optimal performance."
+      },
+      "launch": {
+        "title": "Launch",
+        "description": "We deploy your project and ensure everything works flawlessly across all platforms and devices."
+      }
+    }
+  },
+  "testimonials": {
+    "label": "Testimonials",
+    "title": "What Our Clients",
+    "subtitle": "Say About Us",
+    "previous": "Previous testimonial",
+    "next": "Next testimonial",
+    "position": "{current} / {total}",
+    "items": {
+      "sarah": {
+        "quote": "The minimalist approach perfectly captured our brand essence. Their attention to detail and focus on typography made our digital presence stand out.",
+        "author": "Sarah Johnson",
+        "role": "Creative Director, Studio Black"
+      },
+      "michael": {
+        "quote": "Working with this team was refreshing. They stripped away all the unnecessary elements and delivered a product that was both beautiful and functional.",
+        "author": "Michael Chen",
+        "role": "Founder, Monochrome"
+      },
+      "emily": {
+        "quote": "Their brutalist design philosophy challenged our conventional thinking and resulted in a website that truly captures attention and drives engagement.",
+        "author": "Emily Rodriguez",
+        "role": "Marketing Lead, Contrast Inc."
+      }
+    }
+  },
+  "pricing": {
+    "label": "Pricing",
+    "title": "Simple Pricing",
+    "subtitle": "No Hidden Fees",
+    "annual": "Annual",
+    "save": "(Save 20%)",
+    "monthly": "Monthly",
+    "popular": "Popular",
+    "perYear": "/year",
+    "perMonth": "/month",
+    "plans": {
+      "basic": {
+        "name": "Basic",
+        "description": "For small projects and individuals",
+        "features": [
+          "Minimalist design",
+          "Responsive layout",
+          "Basic animations",
+          "1 revision round",
+          "14-day delivery"
+        ],
+        "cta": "Get Started"
+      },
+      "standard": {
+        "name": "Standard",
+        "description": "For growing businesses and brands",
+        "features": [
+          "Everything in Basic",
+          "Custom brutalist design",
+          "Advanced animations",
+          "3 revision rounds",
+          "Content strategy",
+          "7-day delivery"
+        ],
+        "cta": "Get Started"
+      },
+      "premium": {
+        "name": "Premium",
+        "description": "For established companies and enterprises",
+        "features": [
+          "Everything in Standard",
+          "Comprehensive design system",
+          "Custom functionality",
+          "Unlimited revisions",
+          "SEO optimization",
+          "Priority support",
+          "5-day delivery"
+        ],
+        "cta": "Contact Us"
+      }
+    }
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "Let's Work",
+    "subtitle": "Together",
+    "form": {
+      "fields": {
+        "name": { "label": "Name", "placeholder": "Your name" },
+        "email": { "label": "Email", "placeholder": "your.email@example.com" },
+        "message": {
+          "label": "Message",
+          "placeholder": "Tell us about your project..."
+        }
+      },
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success": "Thank you. Your message has been sent.",
+      "error": "Something went wrong. Please try again.",
+      "validation": {
+        "nameRequired": "Please enter your name.",
+        "emailRequired": "Please enter your email address.",
+        "emailInvalid": "Please enter a valid email address.",
+        "messageRequired": "Please write a message."
+      }
+    },
+    "info": {
+      "title": "Contact Information",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "street": "123 Minimalist Street",
+      "city": "New York, NY 10001",
+      "country": "United States",
+      "social": "Social"
+    }
+  },
+  "footer": {
+    "copyright": "© {year} MONO. All rights reserved.",
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    }
+  }
+}

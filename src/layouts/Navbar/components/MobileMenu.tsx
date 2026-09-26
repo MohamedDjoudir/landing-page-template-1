@@ -1,8 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { navLinks, mobileMenuAnimationConfig } from "../config";
+import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui";
+import { LocaleSwitcher } from "@/components";
+import { sectionLinks } from "../../constants";
+import { mobileMenuAnimation } from "../constants";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -10,30 +14,33 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+  const t = useTranslations("navigation");
+
   if (!isOpen) return null;
 
   return (
     <motion.div
-      initial={mobileMenuAnimationConfig.initial}
-      animate={mobileMenuAnimationConfig.animate}
-      exit={mobileMenuAnimationConfig.exit}
+      initial={mobileMenuAnimation.initial}
+      animate={mobileMenuAnimation.animate}
+      exit={mobileMenuAnimation.exit}
       className="md:hidden bg-black"
     >
       <div className="container mx-auto px-4 py-8">
         <nav className="flex flex-col space-y-6">
-          {navLinks.map((link) => (
+          {sectionLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className="text-neutral-400 hover:text-white py-2 text-2xl font-light"
               onClick={onClose}
             >
-              {link.label}
+              {t(link.key)}
             </Link>
           ))}
-          <button className="border border-white px-5 py-3 text-sm uppercase tracking-widest hover:bg-white hover:text-black transition-colors w-full mt-4">
-            Contact
-          </button>
+          <LocaleSwitcher className="self-start px-0" />
+          <Button variant="outline" className="px-5 w-full mt-4 transition-colors">
+            {t("contact")}
+          </Button>
         </nav>
       </div>
     </motion.div>
