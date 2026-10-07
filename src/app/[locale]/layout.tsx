@@ -8,6 +8,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ThemeProvider, QueryProvider } from "@/providers";
 import { FloatingCursor } from "@/components";
 import { routing, getDirection, openGraphLocales } from "@/i18n";
+import { SITE_URL } from "@/lib";
 
 const inter = Inter({ subsets: ["latin"] });
 const notoSansArabic = Noto_Sans_Arabic({ subsets: ["arabic"] });
@@ -28,8 +29,15 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "metadata" });
 
   return {
+    metadataBase: new URL(SITE_URL),
     title: t("title"),
     description: t("description"),
+    alternates: {
+      canonical: `/${locale}`,
+      languages: Object.fromEntries(
+        routing.locales.map((code) => [code, `/${code}`])
+      ),
+    },
     generator: "Mohamed Djoudir",
     manifest: "/site.webmanifest",
     icons: {
@@ -42,7 +50,7 @@ export async function generateMetadata({
     openGraph: {
       title: t("title"),
       description: t("description"),
-      url: "https://your-website-url.com",
+      url: `/${locale}`,
       siteName: t("siteName"),
       images: [
         {

@@ -8,33 +8,94 @@ Live demo and details: [aniq-ui.com MONO Template](https://www.aniq-ui.com/en/te
 
 ## Getting Started
 
-Requirements: Node.js 18.17 or later and Yarn (`corepack enable`).
+### Requirements
+
+- **With Docker:** Docker only. Nothing else to install.
+- **Without Docker:** Node.js 22 or later, and Yarn 4 through Corepack (run `corepack enable` once).
+
+### Path A: Docker
+
+Run these two commands in this folder:
+
+```sh
+docker build -t agency-portfolio .
+docker run -p 3030:3030 agency-portfolio
+```
+
+Open http://localhost:3030. The page redirects to `/en`, and `/ar` serves the Arabic (right-to-left) version.
+
+### Path B: without Docker
 
 ```sh
 yarn install
-cp .env.example .env.local   # optional, see Environment
 yarn dev
 ```
 
-Open the dev server URL: `/` redirects to `/en`, and `/ar` serves the Arabic (right-to-left) version.
+Open http://localhost:3030.
 
-| Script           | Purpose                    |
-| ---------------- | -------------------------- |
-| `yarn dev`       | Start the dev server       |
-| `yarn build`     | Production build           |
-| `yarn start`     | Serve the production build |
-| `yarn lint`      | Run `next lint`            |
-| `yarn typecheck` | Run `tsc --noEmit`         |
+For a production build:
 
-Every dependency is pinned to an exact version and `yarn.lock` is committed.
+```sh
+yarn build
+yarn start
+```
+
+`yarn start` serves the build on http://localhost:3030.
+
+### A port is already in use?
+
+Another program is using port 3030. Stop it, or run on another port:
+
+- Docker: change the number on the left, for example `docker run -p 3041:3030 agency-portfolio`, then open http://localhost:3041.
+- Without Docker: `yarn dev -p 3041` (or `yarn start -p 3041`), then open http://localhost:3041.
+
+### Scripts
+
+| Script           | Purpose                                         |
+| ---------------- | ----------------------------------------------- |
+| `yarn dev`       | Start the dev server on http://localhost:3030   |
+| `yarn build`     | Production build                                |
+| `yarn start`     | Serve the production build on port 3030         |
+| `yarn lint`      | Run ESLint through `next lint`                  |
+| `yarn typecheck` | Run `tsc --noEmit`                              |
+
+Every dependency is pinned to an exact version and `yarn.lock` is included.
 
 ---
 
 ## Environment
 
-| Variable                   | Purpose                                                                                                                          |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_API_BASE_URL` | Base URL of the API that receives the contact form (`POST /contact` with `{ name, email, message }`). Leave empty to run without a back-end: the form then accepts the message locally and shows its success state. |
+The site runs with no configuration. Both variables are optional. To set them without Docker, copy `.env.example` to `.env.local` and edit it:
+
+```sh
+cp .env.example .env.local
+```
+
+| Variable                   | Default                 | Purpose |
+| -------------------------- | ----------------------- | ------- |
+| `NEXT_PUBLIC_SITE_URL`     | `http://localhost:3030` | The public address of your site, without a trailing slash. It sets the canonical link, the language links and the social preview cards. |
+| `NEXT_PUBLIC_API_BASE_URL` | empty                   | Base URL of the API that receives the contact form (`POST /contact` with `{ name, email, message }`). Leave it empty to run without a back-end: the form then accepts the message locally and shows its success state. |
+
+These values are built into the site, so change them, then build again. With Docker, pass them to the build:
+
+```sh
+docker build -t agency-portfolio \
+  --build-arg NEXT_PUBLIC_SITE_URL=https://www.your-domain.com \
+  --build-arg NEXT_PUBLIC_API_BASE_URL=https://api.your-domain.com .
+```
+
+---
+
+## Customising
+
+| What                 | Where |
+| -------------------- | ----- |
+| Text                 | `messages/en.json` and `messages/ar.json`. Every visible string, label, alt text and the page title and description live here. Change both files together. |
+| Images               | `public/`. The project images are `public/works/1.webp` to `4.webp`, listed in `src/features/home/Work/constants/projectItems.ts`. The social preview image is `public/image.png`, and the icons are `public/favicon.*` and `public/apple-touch-icon.png`. |
+| Colours              | The CSS variables at the top of `src/styles/globals.css`, used by `tailwind.config.ts`. Many sections also use Tailwind's black and white classes directly. |
+| Fonts                | `src/app/[locale]/layout.tsx`: Inter for English and Noto Sans Arabic for Arabic, both loaded with `next/font/google`. |
+| Links                | Section links in `src/layouts/constants/sectionLinks.ts`; social and legal links in `src/layouts/Footer/constants/` and `src/features/home/Contact/constants/`. |
+| Sections             | `src/app/[locale]/page.tsx` lists the sections in order. Each one lives in `src/features/home/<Section>/`. |
 
 ---
 
@@ -64,6 +125,7 @@ src/
 ├── layouts/                # Navbar and Footer
 ├── lib/
 │   ├── api/                # The only place with fetch and endpoint URLs
+│   ├── siteUrl.ts          # SITE_URL from NEXT_PUBLIC_SITE_URL
 │   └── utils.ts            # cn() helper
 ├── providers/              # ThemeProvider, QueryProvider
 ├── services/               # TanStack Query hooks (services/contact/hooks/mutations)
