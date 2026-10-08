@@ -22,7 +22,7 @@ docker build -t agency-portfolio .
 docker run -p 3030:3030 agency-portfolio
 ```
 
-Open http://localhost:3030. The page redirects to `/en`, and `/ar` serves the Arabic (right-to-left) version.
+Open http://localhost:3030. `/` sends the visitor to `/en` or `/ar` from the browser's language (English when neither matches), and for the rest of the browser session it remembers the last language opened (a `NEXT_LOCALE` cookie). `/en` and `/ar` always open that language; `/ar` is right to left.
 
 ### Path B: without Docker
 
@@ -93,7 +93,7 @@ docker build -t agency-portfolio \
 | Text                 | `messages/en.json` and `messages/ar.json`. Every visible string, label, alt text and the page title and description live here. Change both files together. |
 | Images               | `public/`. The project images are `public/works/1.webp` to `4.webp`, listed in `src/features/home/Work/constants/projectItems.ts`. The social preview image is `public/image.png`, and the icons are `public/favicon.*` and `public/apple-touch-icon.png`. |
 | Colours              | The CSS variables at the top of `src/styles/globals.css`, used by `tailwind.config.ts`. Many sections also use Tailwind's black and white classes directly. |
-| Fonts                | `src/app/[locale]/layout.tsx`: Inter for English and Noto Sans Arabic for Arabic, both loaded with `next/font/google`. |
+| Fonts                | `src/app/[locale]/layout.tsx` loads Inter (English) and Noto Sans Arabic (Arabic) with `next/font/google`. The body uses the locale's font. Inter is also exposed as the CSS variable `--font-inter`, which the headings use in `src/styles/globals.css` (`h1` to `h6`). To change a font, import another one from `next/font/google` in the layout and keep the `variable` name. |
 | Links                | Section links in `src/layouts/constants/sectionLinks.ts`; social and legal links in `src/layouts/Footer/constants/` and `src/features/home/Contact/constants/`. |
 | Sections             | `src/app/[locale]/page.tsx` lists the sections in order. Each one lives in `src/features/home/<Section>/`. |
 
@@ -104,7 +104,7 @@ docker build -t agency-portfolio \
 - Locales: `en` (default) and `ar`, routed as `/en` and `/ar`.
 - Messages live in `messages/en.json` and `messages/ar.json`. Every visible string, aria-label, alt text and the page metadata comes from these files, so add a key to both files together.
 - `<html lang dir>` follows the locale, and the layout uses logical Tailwind classes (`ms-*`, `pe-*`, `start-*`, `text-end`) so it mirrors under RTL.
-- To add a locale, add it to `src/i18n/routing.ts`, create `messages/<locale>.json`, and register its direction in `src/i18n/getDirection.ts`.
+- To add a locale, add it to `src/i18n/routing.ts`, create `messages/<locale>.json`, register its direction in `src/i18n/getDirection.ts` and its Open Graph code in `src/i18n/openGraphLocales.ts`, and add its name under `localeSwitcher.names.<code>` in every message file.
 - The header holds a `LocaleSwitcher` (`src/components/LocaleSwitcher`).
 
 ---

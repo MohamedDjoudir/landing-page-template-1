@@ -10,7 +10,7 @@ import { FloatingCursor } from "@/components";
 import { routing, getDirection, openGraphLocales } from "@/i18n";
 import { SITE_URL } from "@/lib";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const notoSansArabic = Noto_Sans_Arabic({ subsets: ["arabic"] });
 
 interface LocaleLayoutProps {
@@ -92,7 +92,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={getDirection(locale)}
-      className="dark"
+      className={`dark ${inter.variable}`}
       suppressHydrationWarning
     >
       <body className={`${font.className} bg-black mx-auto max-w-[1440px]`}>
