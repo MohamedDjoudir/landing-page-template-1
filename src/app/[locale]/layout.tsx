@@ -38,7 +38,7 @@ export async function generateMetadata({
         routing.locales.map((code) => [code, `/${code}`])
       ),
     },
-    generator: "Mohamed Djoudir",
+    generator: "Aniq-UI",
     manifest: "/site.webmanifest",
     icons: {
       icon: [
